@@ -55,7 +55,7 @@
         <apache.httpclient.version>4.4</apache.httpclient.version>
     </properties>
 
-    <groupId>com.swang</groupId>
+    <groupId>com.swang.smartart</groupId>
     <artifactId>smartart</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
