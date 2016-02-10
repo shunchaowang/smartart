@@ -1,0 +1,18 @@
+################### DataSource Configuration ##########################
+jndi.name=template/project
+init-db=false
+
+################### Hibernate Configuration ##########################
+
+hibernate.dialect=org.hibernate.dialect.MySQLDialect
+hibernate.show_sql=true
+hibernate.format_sql=true
+hibernate.hbm2ddl.auto=update
+
+################### JavaMail Configuration ##########################
+smtp.host=smtp.gmail.com
+smtp.port=465
+smtp.protocol=smtps
+smtp.username=ironaire@gmail.com
+smtp.password=
+support.email=ironaire@gmail.com

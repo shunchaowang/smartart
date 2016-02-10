@@ -1,0 +1,2 @@
+# set up the active profile of the context, available options are dev, prod
+spring.profiles.active=dev
