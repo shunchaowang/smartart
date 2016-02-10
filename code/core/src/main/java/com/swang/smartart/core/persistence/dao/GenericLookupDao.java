@@ -5,10 +5,10 @@ import java.io.Serializable;
 /**
  * Generic lookup dao for all lookup domains, including *Status and *Type objects.
  * Is the super interface for all Dao of the lookup objects.
- * <p/>
+ * <p>
  * Created by swang on 2/24/2015.
  */
-public interface GenericLookupDao<T, PK extends Serializable> extends GenericDao<T, PK> {
+public interface GenericLookupDao<T extends Serializable, PK> extends GenericDao<T, PK> {
 
     /**
      * Find object by name.

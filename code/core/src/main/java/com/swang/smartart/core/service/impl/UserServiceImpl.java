@@ -4,13 +4,12 @@ import com.swang.smartart.core.exception.MissingRequiredFieldException;
 import com.swang.smartart.core.exception.NoSuchEntityException;
 import com.swang.smartart.core.exception.NotUniqueException;
 import com.swang.smartart.core.persistence.dao.UserDao;
-import com.swang.smartart.core.service.UserService;
 import com.swang.smartart.core.persistence.dao.UserStatusDao;
 import com.swang.smartart.core.persistence.entity.Role;
 import com.swang.smartart.core.persistence.entity.User;
 import com.swang.smartart.core.persistence.entity.UserStatus;
+import com.swang.smartart.core.service.UserService;
 import com.swang.smartart.core.util.ResourceProperties;
-
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.slf4j.Logger;

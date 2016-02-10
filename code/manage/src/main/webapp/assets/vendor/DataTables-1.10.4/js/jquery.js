@@ -292,8 +292,8 @@
             }), c.getElementsByTagName = ib(function (a) {
                 return a.appendChild(e.createComment("")), !a.getElementsByTagName("*").length
             }), c.getElementsByClassName = $.test(e.getElementsByClassName) && ib(function (a) {
-                return a.innerHTML = "<div class='a'></div><div class='a i'></div>", a.firstChild.className = "i", 2 === a.getElementsByClassName("i").length
-            }), c.getById = ib(function (a) {
+                    return a.innerHTML = "<div class='a'></div><div class='a i'></div>", a.firstChild.className = "i", 2 === a.getElementsByClassName("i").length
+                }), c.getById = ib(function (a) {
                 return o.appendChild(a).id = u, !e.getElementsByName || !e.getElementsByName(u).length
             }), c.getById ? (d.find.ID = function (a, b) {
                 if (typeof b.getElementById !== C && p) {
@@ -321,8 +321,8 @@
                 }
                 return f
             }, d.find.CLASS = c.getElementsByClassName && function (a, b) {
-                return typeof b.getElementsByClassName !== C && p ? b.getElementsByClassName(a) : void 0
-            }, r = [], q = [], (c.qsa = $.test(e.querySelectorAll)) && (ib(function (a) {
+                    return typeof b.getElementsByClassName !== C && p ? b.getElementsByClassName(a) : void 0
+                }, r = [], q = [], (c.qsa = $.test(e.querySelectorAll)) && (ib(function (a) {
                 a.innerHTML = "<select msallowclip=''><option selected=''></option></select>", a.querySelectorAll("[msallowclip^='']").length && q.push("[*^$]=" + M + "*(?:''|\"\")"), a.querySelectorAll("[selected]").length || q.push("\\[" + M + "*(?:value|" + L + ")"), a.querySelectorAll(":checked").length || q.push(":checked")
             }), ib(function (a) {
                 var b = e.createElement("input");
@@ -2592,8 +2592,8 @@
         }).done(function (a) {
             e = arguments, g.html(d ? m("<div>").append(m.parseHTML(a)).find(d) : a)
         }).complete(c && function (a, b) {
-            g.each(c, e || [a.responseText, b, a])
-        }), this
+                g.each(c, e || [a.responseText, b, a])
+            }), this
     }, m.expr.filters.animated = function (a) {
         return m.grep(m.timers, function (b) {
             return a === b.elem

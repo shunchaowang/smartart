@@ -15,11 +15,11 @@ import java.util.Set;
 
 /**
  * Domain class for role.
- * <p/>
+ * <p>
  * 100: Admin
  * 200: Merchant Admin
  * 201: Merchant Operator
- * <p/>
+ * <p>
  * Created by swang on 2/17/2015.
  */
 @Entity

@@ -35,6 +35,7 @@
         </div>
     </div>
     <br>
+
     <div class="row">
         <div class="col-sm-12">
             <table class="table table-bordered" id="user-table">

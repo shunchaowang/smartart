@@ -2,14 +2,11 @@ package com.swang.smartart.core.service.impl;
 
 import com.swang.smartart.core.service.GenericQueryService;
 import com.swang.smartart.core.util.ResourceProperties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.TypedQuery;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by swang on 3/17/2015.
@@ -54,7 +51,7 @@ public abstract class GenericQueryServiceImpl<T extends Serializable, PK>
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search instance wildcard search keyword, like name likes %xx%, etc.

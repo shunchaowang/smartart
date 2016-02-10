@@ -2,7 +2,6 @@ package com.swang.smartart.core.service.impl;
 
 import com.swang.smartart.core.service.GenericDateQueryService;
 import com.swang.smartart.core.util.ResourceProperties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -103,7 +102,7 @@ public abstract class GenericDateQueryServiceImpl<T extends Serializable, PK>
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search instance wildcard search keyword, like name likes %xx%, etc.
@@ -319,7 +318,7 @@ public abstract class GenericDateQueryServiceImpl<T extends Serializable, PK>
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search           instance wildcard search keyword, like name likes %xx%, etc.
@@ -346,7 +345,7 @@ public abstract class GenericDateQueryServiceImpl<T extends Serializable, PK>
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search           instance wildcard search keyword, like name likes %xx%, etc.
@@ -369,7 +368,7 @@ public abstract class GenericDateQueryServiceImpl<T extends Serializable, PK>
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search           instance wildcard search keyword, like name likes %xx%, etc.
@@ -394,7 +393,7 @@ public abstract class GenericDateQueryServiceImpl<T extends Serializable, PK>
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search           instance wildcard search keyword, like name likes %xx%, etc.
@@ -586,7 +585,7 @@ public abstract class GenericDateQueryServiceImpl<T extends Serializable, PK>
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search   instance wildcard search keyword, like name likes %xx%, etc.
@@ -609,7 +608,7 @@ public abstract class GenericDateQueryServiceImpl<T extends Serializable, PK>
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search instance wildcard search keyword, like name likes %xx%, etc.
@@ -629,7 +628,7 @@ public abstract class GenericDateQueryServiceImpl<T extends Serializable, PK>
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search   instance wildcard search keyword, like name likes %xx%, etc.
@@ -650,7 +649,7 @@ public abstract class GenericDateQueryServiceImpl<T extends Serializable, PK>
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search instance wildcard search keyword, like name likes %xx%, etc.

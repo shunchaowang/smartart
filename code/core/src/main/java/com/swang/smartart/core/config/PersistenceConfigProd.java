@@ -34,7 +34,7 @@ import java.util.Properties;
  * seed data.
  * We can enable/disable executing this db.sql script by changing init-db property value in
  * application.properties.
- * <p/>
+ * <p>
  * And finally optionally we have enabled Spring Data JPA repositories scanning using
  *
  * @EnableJpaRepositories to scan "com.lambo.smartpay.repositories" package for JPA repository

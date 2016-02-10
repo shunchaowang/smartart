@@ -4,9 +4,8 @@ import com.swang.smartart.core.exception.MissingRequiredFieldException;
 import com.swang.smartart.core.exception.NoSuchEntityException;
 import com.swang.smartart.core.exception.NotUniqueException;
 import com.swang.smartart.core.persistence.dao.RoleDao;
-import com.swang.smartart.core.service.RoleService;
 import com.swang.smartart.core.persistence.entity.Role;
-
+import com.swang.smartart.core.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -185,4 +184,19 @@ public class RoleServiceImpl implements RoleService {
     public Long countAll() {
         return roleDao.countAll();
     }
+
+    /**
+     * Test if T is blank for the query.
+     *
+     * @param role null return false, all required fields are null return false.
+     * @return
+     */
+    @Override
+    public Boolean isBlank(Role role) {
+        return role == null && role.getActive() == null &&
+                role.getId() == null && StringUtils.isBlank(role.getName()) &&
+                StringUtils.isBlank(role.getCode());
+    }
+
+
 }

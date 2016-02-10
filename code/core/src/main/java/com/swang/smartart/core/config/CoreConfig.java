@@ -5,7 +5,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Configure common service layer beans such as PropertySourcesPlaceholderConfigurer,
@@ -14,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * java.lang.IllegalArgumentException: A ServletContext is required to configure default servlet
  * handling will be
  * thrown when running junit test.
- * <p/>
+ * <p>
  * Created by swang on 2/12/2015.
  */
 @Configuration

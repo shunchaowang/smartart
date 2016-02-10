@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public interface GenericDao<T, PK extends Serializable> {
+public interface GenericDao<T extends Serializable, PK> {
 
     T create(T persistentObject);
 

@@ -17,7 +17,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
-public abstract class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T, PK> {
+public abstract class GenericDaoImpl<T extends Serializable, PK> implements GenericDao<T, PK> {
 
     private static final Logger logger = LoggerFactory.getLogger(GenericDaoImpl.class);
 

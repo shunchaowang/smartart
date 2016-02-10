@@ -649,8 +649,8 @@
                 return typeof src === 'string' && src.indexOf('@') !== -1;
             };
             oCol._bAttrSrc = $.isPlainObject(mDataSrc) && (
-            attrTest(mDataSrc.sort) || attrTest(mDataSrc.type) || attrTest(mDataSrc.filter)
-            );
+                    attrTest(mDataSrc.sort) || attrTest(mDataSrc.type) || attrTest(mDataSrc.filter)
+                );
 
             oCol.fnGetData = function (rowData, type, meta) {
                 var innerData = mData(rowData, type, undefined, meta);
@@ -1038,8 +1038,8 @@
             if (cellData === undefined) {
                 if (settings.iDrawError != draw && defaultContent === null) {
                     _fnLog(settings, 0, "Requested unknown parameter " +
-                    (typeof col.mData == 'function' ? '{function}' : "'" + col.mData + "'") +
-                    " for row " + rowIdx, 4);
+                        (typeof col.mData == 'function' ? '{function}' : "'" + col.mData + "'") +
+                        " for row " + rowIdx, 4);
                     settings.iDrawError = draw;
                 }
                 return defaultContent;
@@ -4423,9 +4423,9 @@
                     }
 
                     label = sTitle + ( nextSort === "asc" ?
-                        oAria.sSortAscending :
-                        oAria.sSortDescending
-                    );
+                                oAria.sSortAscending :
+                                oAria.sSortDescending
+                        );
                 }
                 else {
                     label = sTitle;
@@ -4762,11 +4762,11 @@
          */
         function _fnLog(settings, level, msg, tn) {
             msg = 'DataTables warning: ' +
-            (settings !== null ? 'table id=' + settings.sTableId + ' - ' : '') + msg;
+                (settings !== null ? 'table id=' + settings.sTableId + ' - ' : '') + msg;
 
             if (tn) {
                 msg += '. For more information about this error, please see ' +
-                'http://datatables.net/tn/' + tn;
+                    'http://datatables.net/tn/' + tn;
             }
 
             if (!level) {
@@ -13754,25 +13754,25 @@
                                     case 'first':
                                         btnDisplay = lang.sFirst;
                                         btnClass = button + (page > 0 ?
-                                            '' : ' ' + classes.sPageButtonDisabled);
+                                                '' : ' ' + classes.sPageButtonDisabled);
                                         break;
 
                                     case 'previous':
                                         btnDisplay = lang.sPrevious;
                                         btnClass = button + (page > 0 ?
-                                            '' : ' ' + classes.sPageButtonDisabled);
+                                                '' : ' ' + classes.sPageButtonDisabled);
                                         break;
 
                                     case 'next':
                                         btnDisplay = lang.sNext;
                                         btnClass = button + (page < pages - 1 ?
-                                            '' : ' ' + classes.sPageButtonDisabled);
+                                                '' : ' ' + classes.sPageButtonDisabled);
                                         break;
 
                                     case 'last':
                                         btnDisplay = lang.sLast;
                                         btnClass = button + (page < pages - 1 ?
-                                            '' : ' ' + classes.sPageButtonDisabled);
+                                                '' : ' ' + classes.sPageButtonDisabled);
                                         break;
 
                                     default:

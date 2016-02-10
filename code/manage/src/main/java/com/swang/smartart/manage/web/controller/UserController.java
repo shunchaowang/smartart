@@ -3,20 +3,20 @@ package com.swang.smartart.manage.web.controller;
 import com.swang.smartart.core.exception.MissingRequiredFieldException;
 import com.swang.smartart.core.exception.NoSuchEntityException;
 import com.swang.smartart.core.exception.NotUniqueException;
+import com.swang.smartart.core.persistence.entity.Role;
 import com.swang.smartart.core.persistence.entity.User;
 import com.swang.smartart.core.persistence.entity.UserStatus;
-import com.swang.smartart.core.persistence.entity.Role;
+import com.swang.smartart.core.service.RoleService;
 import com.swang.smartart.core.service.UserService;
 import com.swang.smartart.core.service.UserStatusService;
-import com.swang.smartart.core.service.RoleService;
 import com.swang.smartart.core.util.ResourceProperties;
+import com.swang.smartart.manage.util.DataTablesParams;
+import com.swang.smartart.manage.util.JsonUtil;
+import com.swang.smartart.manage.web.exception.BadRequestException;
 import com.swang.smartart.manage.web.exception.IntervalServerException;
 import com.swang.smartart.manage.web.exception.RemoteAjaxException;
 import com.swang.smartart.manage.web.vo.UserCommand;
 import com.swang.smartart.manage.web.vo.table.DataTablesResultSet;
-import com.swang.smartart.manage.util.DataTablesParams;
-import com.swang.smartart.manage.util.JsonUtil;
-import com.swang.smartart.manage.web.exception.BadRequestException;
 import com.swang.smartart.manage.web.vo.table.DataTablesUser;
 import com.swang.smartart.manage.web.vo.table.JsonResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,8 +35,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -92,7 +91,7 @@ public class UserController {
                 || params.getOrder() == null || params.getOrderDir() == null) {
             throw new BadRequestException("400", "Bad Request.");
         }
-         // formulate criteria query
+        // formulate criteria query
         // if active == false means archive, no role
         // support ad hoc search on username only
         // support order on id and createdTime only
@@ -109,6 +108,7 @@ public class UserController {
         // count total records
         Long recordsTotal = userService
                 .countByCriteria(includedUser);
+
         // count records filtered
         Long recordsFiltered = userService
                 .countByCriteria(includedUser, params.getSearch());

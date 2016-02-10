@@ -19,7 +19,7 @@ import java.util.Properties;
  * java.lang.IllegalArgumentException: A ServletContext is required to configure default servlet
  * handling will be
  * thrown when running junit test.
- * <p/>
+ * <p>
  * Created by swang on 2/12/2015.
  */
 @Configuration

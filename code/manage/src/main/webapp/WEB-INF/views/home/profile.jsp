@@ -10,7 +10,7 @@
             </li>
             <li class="active">
                 <i class="glyphicon glyphicon-wrench"></i>
-                <spring:message code="user.profile.label" />
+                <spring:message code="user.profile.label"/>
             </li>
         </ol>
     </div>

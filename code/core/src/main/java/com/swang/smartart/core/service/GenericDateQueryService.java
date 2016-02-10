@@ -87,7 +87,7 @@ public interface GenericDateQueryService<T extends Serializable, PK>
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search instance wildcard search keyword, like name likes %xx%, etc.
@@ -200,11 +200,6 @@ public interface GenericDateQueryService<T extends Serializable, PK>
     List<T> findByCriteria(T t, String search,
                            Date createdTimeStart, Date createdTimeEnd);
 
-
-    // // 2nd scenario only t
-
-    // // // 1st condition both pagination and order
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
@@ -228,8 +223,6 @@ public interface GenericDateQueryService<T extends Serializable, PK>
                            String order, ResourceProperties.JpaOrderDir orderDir,
                            Date createdTimeStart, Date createdTimeEnd);
 
-    // // // 2nd condition only pagination
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
@@ -249,8 +242,6 @@ public interface GenericDateQueryService<T extends Serializable, PK>
      */
     List<T> findByCriteria(T t, Integer start, Integer length,
                            Date createdTimeStart, Date createdTimeEnd);
-
-    // // // 3rd only order
 
     /**
      * Dynamic search like grails findBy...
@@ -273,8 +264,6 @@ public interface GenericDateQueryService<T extends Serializable, PK>
                            String order, ResourceProperties.JpaOrderDir orderDir,
                            Date createdTimeStart, Date createdTimeEnd);
 
-    // // // 4th neither pagination or order
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
@@ -292,17 +281,13 @@ public interface GenericDateQueryService<T extends Serializable, PK>
      */
     List<T> findByCriteria(T t, Date createdTimeStart, Date createdTimeEnd);
 
-    // // 3rd only search including empty search
-
-    // // // 1st condition both pagination and order
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search           instance wildcard search keyword, like name likes %xx%, etc.
@@ -319,15 +304,13 @@ public interface GenericDateQueryService<T extends Serializable, PK>
                            String order, ResourceProperties.JpaOrderDir orderDir,
                            Date createdTimeStart, Date createdTimeEnd);
 
-    // // // 2nd condition only pagination
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search           instance wildcard search keyword, like name likes %xx%, etc.
@@ -341,15 +324,13 @@ public interface GenericDateQueryService<T extends Serializable, PK>
     List<T> findByCriteria(String search, Integer start, Integer length,
                            Date createdTimeStart, Date createdTimeEnd);
 
-    // // // 3rd only order
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search           instance wildcard search keyword, like name likes %xx%, etc.
@@ -364,15 +345,13 @@ public interface GenericDateQueryService<T extends Serializable, PK>
                            String order, ResourceProperties.JpaOrderDir orderDir,
                            Date createdTimeStart, Date createdTimeEnd);
 
-    // // // 4th neither pagination or order
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search           instance wildcard search keyword, like name likes %xx%, etc.
@@ -382,11 +361,6 @@ public interface GenericDateQueryService<T extends Serializable, PK>
      * @return
      */
     List<T> findByCriteria(String search, Date createdTimeStart, Date createdTimeEnd);
-
-    // without date range
-    // // 1st scenario with both t and search
-
-    // // // 1st condition both pagination and order
 
     /**
      * This one will be the abstract function acting as a template.
@@ -411,8 +385,6 @@ public interface GenericDateQueryService<T extends Serializable, PK>
     List<T> findByCriteria(T t, String search, Integer start, Integer length,
                            String order, ResourceProperties.JpaOrderDir orderDir);
 
-    // // // 2nd condition only pagination
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
@@ -431,8 +403,6 @@ public interface GenericDateQueryService<T extends Serializable, PK>
      * @return
      */
     List<T> findByCriteria(T t, String search, Integer start, Integer length);
-
-    // // // 3rd only order
 
     /**
      * Dynamic search like grails findBy...
@@ -454,8 +424,6 @@ public interface GenericDateQueryService<T extends Serializable, PK>
     List<T> findByCriteria(T t, String search,
                            String order, ResourceProperties.JpaOrderDir orderDir);
 
-    // // // 4th neither pagination or order
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
@@ -472,10 +440,6 @@ public interface GenericDateQueryService<T extends Serializable, PK>
      * @return
      */
     List<T> findByCriteria(T t, String search);
-
-    // // 2nd scenario only t
-
-    // // // 1st condition both pagination and order
 
     /**
      * Dynamic search like grails findBy...
@@ -497,8 +461,6 @@ public interface GenericDateQueryService<T extends Serializable, PK>
     List<T> findByCriteria(T t, Integer start, Integer length,
                            String order, ResourceProperties.JpaOrderDir orderDir);
 
-    // // // 2nd condition only pagination
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
@@ -515,8 +477,6 @@ public interface GenericDateQueryService<T extends Serializable, PK>
      * @return
      */
     List<T> findByCriteria(T t, Integer start, Integer length);
-
-    // // // 3rd only order
 
     /**
      * Dynamic search like grails findBy...
@@ -536,8 +496,6 @@ public interface GenericDateQueryService<T extends Serializable, PK>
     List<T> findByCriteria(T t,
                            String order, ResourceProperties.JpaOrderDir orderDir);
 
-    // // // 4th neither pagination or order
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
@@ -553,17 +511,13 @@ public interface GenericDateQueryService<T extends Serializable, PK>
      */
     List<T> findByCriteria(T t);
 
-    // // 3rd only search including empty search
-
-    // // // 1st condition both pagination and order
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search   instance wildcard search keyword, like name likes %xx%, etc.
@@ -577,15 +531,13 @@ public interface GenericDateQueryService<T extends Serializable, PK>
     List<T> findByCriteria(String search, Integer start, Integer length,
                            String order, ResourceProperties.JpaOrderDir orderDir);
 
-    // // // 2nd condition only pagination
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search instance wildcard search keyword, like name likes %xx%, etc.
@@ -596,15 +548,13 @@ public interface GenericDateQueryService<T extends Serializable, PK>
      */
     List<T> findByCriteria(String search, Integer start, Integer length);
 
-    // // // 3rd only order
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search   instance wildcard search keyword, like name likes %xx%, etc.
@@ -616,15 +566,13 @@ public interface GenericDateQueryService<T extends Serializable, PK>
     List<T> findByCriteria(String search,
                            String order, ResourceProperties.JpaOrderDir orderDir);
 
-    // // // 4th neither pagination or order
-
     /**
      * Dynamic search like grails findBy...
      * We create a dynamic criteria, like grails createCriteria() {}.
      * DataTables dynamic ordering is also supported.
      * To support DataTables pagination we have the start for the offset of the search, and
      * length for the max results we want to return.
-     * <p/>
+     * <p>
      * it means no criteria on exact equals if t is null.
      *
      * @param search instance wildcard search keyword, like name likes %xx%, etc.

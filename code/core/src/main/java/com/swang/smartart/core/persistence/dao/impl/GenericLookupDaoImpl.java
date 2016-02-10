@@ -17,10 +17,10 @@ import java.lang.reflect.Type;
 /**
  * Generic lookup dao for all lookup domains, including *Status and *Type objects.
  * Is the super interface for all Dao of the lookup objects.
- * <p/>
+ * <p>
  * Created by swang on 2/24/2015.
  */
-public abstract class GenericLookupDaoImpl<T, PK extends Serializable> extends GenericDaoImpl<T, PK>
+public abstract class GenericLookupDaoImpl<T extends Serializable, PK> extends GenericDaoImpl<T, PK>
         implements GenericLookupDao<T, PK> {
 
     private final static Logger logger = LoggerFactory.getLogger(GenericLookupDaoImpl.class);

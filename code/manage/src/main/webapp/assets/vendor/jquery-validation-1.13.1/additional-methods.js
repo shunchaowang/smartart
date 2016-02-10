@@ -548,12 +548,12 @@
         //XYZ
         if (/^[XYZ]{1}/.test(value)) {
             return (
-            value[8] === "TRWAGMYFPDXBNJZSQVHLCKE".charAt(
-                value.replace("X", "0")
-                    .replace("Y", "1")
-                    .replace("Z", "2")
-                    .substring(0, 8) % 23
-            )
+                value[8] === "TRWAGMYFPDXBNJZSQVHLCKE".charAt(
+                    value.replace("X", "0")
+                        .replace("Y", "1")
+                        .replace("Z", "2")
+                        .substring(0, 8) % 23
+                )
             );
         }
 

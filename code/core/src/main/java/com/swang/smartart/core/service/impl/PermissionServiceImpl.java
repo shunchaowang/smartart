@@ -6,7 +6,6 @@ import com.swang.smartart.core.exception.NotUniqueException;
 import com.swang.smartart.core.persistence.dao.PermissionDao;
 import com.swang.smartart.core.persistence.entity.Permission;
 import com.swang.smartart.core.service.PermissionService;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -184,5 +183,18 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public Long countAll() {
         return permissionDao.countAll();
+    }
+
+    /**
+     * Test if T is blank for the query.
+     *
+     * @param permission null return false, all required fields are null return false.
+     * @return
+     */
+    @Override
+    public Boolean isBlank(Permission permission) {
+        return permission == null && permission.getId() == null &&
+                permission.getActive() == null && StringUtils.isBlank(permission.getCode()) &&
+                StringUtils.isBlank(permission.getName());
     }
 }
