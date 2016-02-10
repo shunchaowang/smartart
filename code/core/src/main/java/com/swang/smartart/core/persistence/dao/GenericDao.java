@@ -11,8 +11,6 @@ public interface GenericDao<T, PK extends Serializable> {
 
     T create(T persistentObject);
 
-    List<T> getAll();
-
     T get(PK id);
 
     T update(T persistentObject);
@@ -20,6 +18,8 @@ public interface GenericDao<T, PK extends Serializable> {
     void delete(PK id);
 
     Long countAll();
+
+    List<T> getAll();
 
     /**
      * Counts the record using positional parameters.
@@ -78,4 +78,5 @@ public interface GenericDao<T, PK extends Serializable> {
     TypedQuery<T> createQuery(CriteriaQuery<T> criteriaQuery);
 
     TypedQuery<Long> createCountQuery(CriteriaQuery<Long> criteriaQuery);
+
 }

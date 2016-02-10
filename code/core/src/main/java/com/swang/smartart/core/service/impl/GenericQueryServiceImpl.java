@@ -6,8 +6,10 @@ import com.swang.smartart.core.util.ResourceProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.TypedQuery;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by swang on 3/17/2015.

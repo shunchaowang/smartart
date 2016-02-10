@@ -312,7 +312,6 @@ public abstract class GenericDaoImpl<T, PK extends Serializable> implements Gene
         return entityManager.createQuery(criteriaQuery);
     }
 
-    @Override
     public TypedQuery<Long> createCountQuery(CriteriaQuery<Long> criteriaQuery) {
         return entityManager.createQuery(criteriaQuery);
     }

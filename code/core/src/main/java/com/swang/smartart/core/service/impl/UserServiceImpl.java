@@ -55,6 +55,11 @@ public class UserServiceImpl extends GenericQueryServiceImpl<User, Long> impleme
      */
     @Override
     public User findByUsername(String username) {
+
+        if (StringUtils.isBlank(username)) {
+            logger.debug("Email is blank.");
+            return null;
+        }
         CriteriaBuilder builder = userDao.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root<User> root = query.from(User.class);
@@ -79,7 +84,22 @@ public class UserServiceImpl extends GenericQueryServiceImpl<User, Long> impleme
             logger.debug("Email is blank.");
             return null;
         }
-        return userDao.findByEmail(email);
+        CriteriaBuilder builder = userDao.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> root = query.from(User.class);
+        query.select(root);
+
+        Path<String> path = root.get("email");
+        Predicate predicate = builder.equal(path, email);
+        query.where(predicate);
+        TypedQuery<User> typedQuery = userDao.createQuery(query);
+
+        try {
+            return typedQuery.getSingleResult();
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            return null;
+        }
     }
 
     @Transactional
@@ -194,7 +214,38 @@ public class UserServiceImpl extends GenericQueryServiceImpl<User, Long> impleme
     @Override
     public Long countByCriteria(User user, String search) {
 
-        return userDao.countByCriteria(user, search);
+        CriteriaBuilder builder = userDao.getCriteriaBuilder();
+        CriteriaQuery<Long> query = builder.createQuery(Long.class);
+        Root<User> root = query.from(User.class);
+        query.select(builder.count(root));
+
+        Predicate predicate = null;
+        // if user is not null equal predicate needs to be generated
+        if (!isBlank(user)) {
+            predicate = equalPredicate(builder, root, user);
+        }
+
+        // if search is not blank like predicate needs to be generated
+        if (!StringUtils.isBlank(search)) {
+            Predicate likePredicate = likePredicate(builder, root, search);
+            if (predicate == null) {
+                predicate = likePredicate;
+            } else {
+                predicate = builder.and(predicate, likePredicate);
+            }
+        }
+
+        if (predicate != null) {
+            query.where(predicate);
+        }
+        TypedQuery<Long> typedQuery = userDao.createCountQuery(query);
+        logger.debug("countByCriteria query is " + typedQuery);
+        try {
+            return userDao.countAllByCriteria(typedQuery);
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -220,7 +271,54 @@ public class UserServiceImpl extends GenericQueryServiceImpl<User, Long> impleme
     public List<User> findByCriteria(User user, String search, Integer start, Integer length,
                                      String order, ResourceProperties.JpaOrderDir orderDir) {
 
-        return userDao.findByCriteria(user, search, start, length, order, orderDir);
+        CriteriaBuilder builder = userDao.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> root = query.from(User.class);
+        query.select(root);
+
+        Predicate predicate = null;
+        // if customer is not null equal predicate needs to be generated
+        if (!isBlank(user)) {
+            predicate = equalPredicate(builder, root, user);
+        }
+
+        // if search is not blank like predicate needs to be generated
+        if (!StringUtils.isBlank(search)) {
+            Predicate likePredicate = likePredicate(builder, root, search);
+            if (predicate == null) {
+                predicate = likePredicate;
+            } else {
+                predicate = builder.and(predicate, likePredicate);
+            }
+        }
+
+        if (predicate != null) {
+            query.where(predicate);
+        }
+        if (StringUtils.isBlank(order)) {
+            order = "id";
+        }
+        if (orderDir == null) {
+            orderDir = ResourceProperties.JpaOrderDir.DESC;
+        }
+        query.orderBy(orderBy(builder, root, order, orderDir));
+        TypedQuery<User> typedQuery = userDao.createQuery(query);
+        // pagination
+        if (start != null) {
+            typedQuery.setFirstResult(start);
+        }
+        if (length != null) {
+            typedQuery.setMaxResults(length);
+        }
+
+        logger.debug("findByCriteria query is " + typedQuery.unwrap(Query.class).getQueryString());
+
+        try {
+            return userDao.findAllByCriteria(typedQuery);
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            return null;
+        }
     }
 
     @Override
@@ -440,11 +538,15 @@ public class UserServiceImpl extends GenericQueryServiceImpl<User, Long> impleme
      * @param user null return false, all required fields are null return false.
      * @return
      */
-    private Boolean isBlank(User user) {
+    public Boolean isBlank(User user) {
         if (user == null) {
             return true;
         }
-        if (user.getId() == null && user.getUserStatus() == null
+        if (user.getId() == null && StringUtils.isBlank(user.getUsername())
+                && StringUtils.isBlank(user.getFirstName())
+                && StringUtils.isBlank(user.getLastName())
+                && StringUtils.isBlank(user.getEmail())
+                && user.getUserStatus() == null
                 && user.getRoles() == null
                 && user.getActive() == null) {
             return true;
@@ -500,11 +602,41 @@ public class UserServiceImpl extends GenericQueryServiceImpl<User, Long> impleme
             user) {
 
         Predicate predicate = null;
+        // check id, if id != null, query by id and return
+        if (user.getId() != null) {
+            predicate = builder.equal(root.<Long>get("id"), builder.literal(user.getId()));
+            return predicate;
+        }
+
+        // check username
+        if (StringUtils.isNotBlank(user.getUsername())) {
+            predicate = builder.like(root.<String>get("username"),
+                    builder.literal("%" + user.getUsername() + "%"));
+        }
+        // check firstName
+        if (StringUtils.isNotBlank(user.getFirstName())) {
+            predicate = builder.like(root.<String>get("firstName"),
+                    builder.literal("%" + user.getFirstName() + "%"));
+        }
+        // check lastName
+        if (StringUtils.isNotBlank(user.getLastName())) {
+            predicate = builder.like(root.<String>get("lastName"),
+                    builder.literal("%" + user.getLastName() + "%"));
+        }
+        // check email
+        if (StringUtils.isNotBlank(user.getEmail())) {
+            predicate = builder.like(root.<String>get("email"),
+                    builder.literal("%" + user.getEmail() + "%"));
+        }
 
         if (user.getActive() != null) {
             Predicate activePredicate = builder.equal(root.<Boolean>get("active"),
                     builder.literal(user.getActive()));
-            predicate = activePredicate;
+            if (predicate == null) {
+                predicate = activePredicate;
+            } else {
+                predicate = builder.and(predicate, activePredicate);
+            }
         }
 
         // check User Status id
@@ -518,7 +650,7 @@ public class UserServiceImpl extends GenericQueryServiceImpl<User, Long> impleme
                 predicate = builder.and(predicate, userStatusPredicate);
             }
         }
-       
+
         // check role ids
         if (user.getRoles() != null && user.getRoles().size() > 0) {
             // create set for role id
@@ -579,6 +711,10 @@ public class UserServiceImpl extends GenericQueryServiceImpl<User, Long> impleme
 
         // get all supporting paths
         Path<Long> idPath = root.get("id");
+        Path<String> usernamePath = root.get("username");
+        Path<String> firstNamePath = root.get("firstName");
+        Path<String> lastNamePath = root.get("lastName");
+        Path<String> emailPath = root.get("email");
         Path<Date> createdTimePath = root.get("createdTime");
 
         // create Order instance, default would be ORDER BY id DESC, newest to oldest
@@ -588,6 +724,18 @@ public class UserServiceImpl extends GenericQueryServiceImpl<User, Long> impleme
                 switch (order) {
                     case "id":
                         orderBy = builder.asc(idPath);
+                        break;
+                    case "username":
+                        orderBy = builder.asc(usernamePath);
+                        break;
+                    case "firstName":
+                        orderBy = builder.asc(firstNamePath);
+                        break;
+                    case "lastName":
+                        orderBy = builder.asc(lastNamePath);
+                        break;
+                    case "email":
+                        orderBy = builder.asc(emailPath);
                         break;
                     case "createdTime":
                         orderBy = builder.asc(createdTimePath);
@@ -600,6 +748,18 @@ public class UserServiceImpl extends GenericQueryServiceImpl<User, Long> impleme
                 switch (order) {
                     case "id":
                         orderBy = builder.desc(idPath);
+                        break;
+                    case "username":
+                        orderBy = builder.desc(usernamePath);
+                        break;
+                    case "firstName":
+                        orderBy = builder.desc(firstNamePath);
+                        break;
+                    case "lastName":
+                        orderBy = builder.desc(lastNamePath);
+                        break;
+                    case "email":
+                        orderBy = builder.desc(emailPath);
                         break;
                     case "createdTime":
                         orderBy = builder.desc(createdTimePath);

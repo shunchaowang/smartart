@@ -2,8 +2,10 @@ package com.swang.smartart.core.service;
 
 import com.swang.smartart.core.util.ResourceProperties;
 
+import javax.persistence.TypedQuery;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by swang on 3/10/2015.
@@ -244,4 +246,12 @@ public interface GenericQueryService<T extends Serializable, PK>
      * @return
      */
     List<T> findByCriteria(T t);
+
+    /**
+     * Test if T is blank for the query.
+     *
+     * @param t null return false, all required fields are null return false.
+     * @return
+     */
+    Boolean isBlank(T t);
 }
