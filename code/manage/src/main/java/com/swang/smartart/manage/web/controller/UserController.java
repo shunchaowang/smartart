@@ -65,22 +65,22 @@ public class UserController {
 
     // index view
     @PreAuthorize("isAuthenticated() and hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = {"/index/all"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/indexAll"}, method = RequestMethod.GET)
     public String indexAll(Model model) {
-        model.addAttribute("_view", "user/index/all");
+        model.addAttribute("_view", "user/indexAll");
         return "main";
     }
 
     // archive view
     @PreAuthorize("isAuthenticated() and hasPermission('', 'PERMISSION_ADMIN')")
-    @RequestMapping(value = {"/index/archive"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/indexArchive"}, method = RequestMethod.GET)
     public String indexArchive(Model model) {
-        model.addAttribute("_view", "user/index/archive");
+        model.addAttribute("_view", "user/indexArchive");
         return "main";
     }
 
     // ajax for DataTables
-    @RequestMapping(value = "/list/all", method = RequestMethod.GET,
+    @RequestMapping(value = "/listAll", method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String listAll(HttpServletRequest request) {
@@ -133,7 +133,7 @@ public class UserController {
     }
 
     // ajax for DataTables
-    @RequestMapping(value = "/list/archive", method = RequestMethod.GET,
+    @RequestMapping(value = "/listArchive", method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String listArchive(HttpServletRequest request) {

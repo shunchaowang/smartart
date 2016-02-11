@@ -43,8 +43,8 @@
         rootURL: ${rootURL}
     </h3>
 
-    <a href="${rootURL}user/index/all">User Table</a><br/>
-    <a href="${rootURL}user/list/all">User in Json Array</a>
+    <a href="${rootURL}user/indexAll">User Table</a><br/>
+    <a href="${rootURL}user/listAll">User in Json Array</a>
 
     <p><a href="${rootURL}logout">Logout</a></p>
 

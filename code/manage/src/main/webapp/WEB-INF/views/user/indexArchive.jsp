@@ -71,7 +71,7 @@
                 ]
             },
             'ajax': {
-                'url': "${rootURL}user/list/archive",
+                'url': "${rootURL}user/listArchive",
                 'type': "GET",
                 'dataType': 'json'
             },

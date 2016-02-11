@@ -1,4 +1,4 @@
-<%@include file="../../taglib.jsp" %>
+<%@include file="../taglib.jsp" %>
 
 <spring:message code="user.label" var="userLabel"/>
 
@@ -85,7 +85,7 @@
                 ]
             },
             'ajax': {
-                'url': "${rootURL}user/list/all",
+                'url': "${rootURL}user/listAll",
                 'type': "GET",
                 'dataType': 'json'
             },

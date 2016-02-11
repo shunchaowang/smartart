@@ -71,7 +71,7 @@
     </div>
     <div class="row">
         <div class="col-sm-2 col-sm-offset-2">
-            <a href="${rootURL}user/index/all">
+            <a href="${rootURL}user/indexAll">
                 <button type="button" class="btn btn-default">
                     <spring:message code="action.return.label"/>
                 </button>
