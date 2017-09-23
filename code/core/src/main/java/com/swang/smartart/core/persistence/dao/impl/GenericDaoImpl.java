@@ -2,6 +2,7 @@ package com.swang.smartart.core.persistence.dao.impl;
 
 import com.swang.smartart.core.persistence.dao.GenericDao;
 import com.swang.smartart.core.util.ResourceProperties;
+import org.hibernate.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -268,15 +269,20 @@ public abstract class GenericDaoImpl<T extends Serializable, PK> implements Gene
         return query.getResultList();
     }
 
+    @Override
+    public CriteriaBuilder getCriteriaBuilder() {
+        return entityManager.getCriteriaBuilder();
+    }
+
     /**
-     * Count record number using JPA criteria builder.
+     * Count by jpa criteria query.
      *
-     * @param typedQuery the criteria with query root, where clause
-     * @retrun count of the result
+     * @param criteriaQuery the criteria contains all query
+     * @return the number of the query
      */
     @Override
-    public Long countAllByCriteria(TypedQuery<Long> typedQuery) {
-
+    public Long count(CriteriaQuery<Long> criteriaQuery) {
+        TypedQuery<Long> typedQuery = entityManager.createQuery(criteriaQuery);
         try {
             return typedQuery.getSingleResult();
         } catch (Exception e) {
@@ -286,13 +292,40 @@ public abstract class GenericDaoImpl<T extends Serializable, PK> implements Gene
     }
 
     /**
-     * Find all records using JPA criteria builder.
+     * Count by jqa query language.
      *
-     * @param typedQuery the criteria with query root, where clause and order by
-     * @retrun List of the result objects
+     * @param jpql query string, like SELECT u.username FROM User AS u.
+     * @return number of result
      */
     @Override
-    public List<T> findAllByCriteria(TypedQuery<T> typedQuery) {
+    public Long count(String jpql) {
+        TypedQuery<Long> typedQuery = entityManager.createQuery(jpql, Long.class);
+        try {
+            return typedQuery.getSingleResult();
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Find all T from criteria with offset and max records.
+     *
+     * @param criteriaQuery the criteria contains all query
+     * @param start         the offset of the result
+     * @param length        the max records of the result
+     * @return list of T
+     */
+    @Override
+    public List<T> find(CriteriaQuery<T> criteriaQuery, Integer start, Integer length) {
+        TypedQuery<T> typedQuery = entityManager.createQuery(criteriaQuery);
+        logger.debug("findByCriteria query is " + typedQuery.unwrap(Query.class).getQueryString());
+        if (start != null) {
+            typedQuery.setFirstResult(start);
+        }
+        if (length != null) {
+            typedQuery.setMaxResults(length);
+        }
 
         try {
             return typedQuery.getResultList();
@@ -302,17 +335,92 @@ public abstract class GenericDaoImpl<T extends Serializable, PK> implements Gene
         }
     }
 
+    /**
+     * Count by jqa query language.
+     *
+     * @param jpql query string, like SELECT u.username FROM User AS u.
+     * @return list of result
+     */
     @Override
-    public CriteriaBuilder getCriteriaBuilder() {
-        return entityManager.getCriteriaBuilder();
+    public List<T> find(String jpql) {
+        TypedQuery<T> typedQuery = entityManager.createQuery(jpql, type);
+        try {
+            return typedQuery.getResultList();
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            return null;
+        }
     }
 
+    /**
+     * Find all T from criteria with offset.
+     *
+     * @param criteriaQuery the criteria contains all query
+     * @param start         the offset of the result
+     * @return list of T
+     */
     @Override
-    public TypedQuery<T> createQuery(CriteriaQuery<T> criteriaQuery) {
-        return entityManager.createQuery(criteriaQuery);
+    public List<T> find(CriteriaQuery<T> criteriaQuery, Integer start) {
+        TypedQuery<T> typedQuery = entityManager.createQuery(criteriaQuery);
+        if (start != null) {
+            typedQuery.setFirstResult(start);
+        }
+        try {
+            return typedQuery.getResultList();
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            return null;
+        }
     }
 
-    public TypedQuery<Long> createCountQuery(CriteriaQuery<Long> criteriaQuery) {
-        return entityManager.createQuery(criteriaQuery);
+    /**
+     * Find all T from criteria.
+     *
+     * @param criteriaQuery the criteria contains all query
+     * @return list of T
+     */
+    @Override
+    public List<T> find(CriteriaQuery<T> criteriaQuery) {
+        TypedQuery<T> typedQuery = entityManager.createQuery(criteriaQuery);
+        try {
+            return typedQuery.getResultList();
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Query for one single object
+     *
+     * @param criteriaQuery
+     * @return Single T
+     */
+    @Override
+    public T findSingle(CriteriaQuery<T> criteriaQuery) {
+        TypedQuery<T> typedQuery = entityManager.createQuery(criteriaQuery);
+        try {
+            return typedQuery.getSingleResult();
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Query for one single object
+     *
+     * @param jpql
+     * @return Single T
+     */
+    @Override
+    public T findSingle(String jpql) {
+        TypedQuery<T> typedQuery = entityManager.createQuery(jpql, type);
+        try {
+            return typedQuery.getSingleResult();
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            return null;
+        }
     }
 }

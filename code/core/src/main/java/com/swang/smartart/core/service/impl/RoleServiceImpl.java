@@ -184,19 +184,4 @@ public class RoleServiceImpl implements RoleService {
     public Long countAll() {
         return roleDao.countAll();
     }
-
-    /**
-     * Test if T is blank for the query.
-     *
-     * @param role null return false, all required fields are null return false.
-     * @return
-     */
-    @Override
-    public Boolean isBlank(Role role) {
-        return role == null && role.getActive() == null &&
-                role.getId() == null && StringUtils.isBlank(role.getName()) &&
-                StringUtils.isBlank(role.getCode());
-    }
-
-
 }

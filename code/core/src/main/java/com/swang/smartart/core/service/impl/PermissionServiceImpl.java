@@ -32,7 +32,7 @@ public class PermissionServiceImpl implements PermissionService {
      *
      * @param name
      * @return
-     * @throws com.lambo.smartpay.core.exception.NoSuchEntityException
+     * @throws com.swang.smartart.core.exception.NoSuchEntityException
      */
     @Override
     public Permission findByName(String name) throws NoSuchEntityException {
@@ -50,7 +50,7 @@ public class PermissionServiceImpl implements PermissionService {
      *
      * @param code
      * @return
-     * @throws com.lambo.smartpay.core.exception.NoSuchEntityException
+     * @throws com.swang.smartart.core.exception.NoSuchEntityException
      */
     @Override
     public Permission findByCode(String code) throws NoSuchEntityException {
@@ -99,7 +99,7 @@ public class PermissionServiceImpl implements PermissionService {
      *
      * @param id
      * @return
-     * @throws com.lambo.smartpay.core.exception.NoSuchEntityException
+     * @throws com.swang.smartart.core.exception.NoSuchEntityException
      */
     @Override
     public Permission get(Long id) throws NoSuchEntityException {
@@ -119,8 +119,8 @@ public class PermissionServiceImpl implements PermissionService {
      *
      * @param permission
      * @return
-     * @throws com.lambo.smartpay.core.exception.MissingRequiredFieldException
-     * @throws com.lambo.smartpay.core.exception.NotUniqueException
+     * @throws com.swang.smartart.core.exception.MissingRequiredFieldException
+     * @throws com.swang.smartart.core.exception.NotUniqueException
      */
     @Transactional
     @Override
@@ -158,7 +158,7 @@ public class PermissionServiceImpl implements PermissionService {
      *
      * @param id
      * @return
-     * @throws com.lambo.smartpay.core.exception.NoSuchEntityException
+     * @throws com.swang.smartart.core.exception.NoSuchEntityException
      */
     @Transactional
     @Override
@@ -183,18 +183,5 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public Long countAll() {
         return permissionDao.countAll();
-    }
-
-    /**
-     * Test if T is blank for the query.
-     *
-     * @param permission null return false, all required fields are null return false.
-     * @return
-     */
-    @Override
-    public Boolean isBlank(Permission permission) {
-        return permission == null && permission.getId() == null &&
-                permission.getActive() == null && StringUtils.isBlank(permission.getCode()) &&
-                StringUtils.isBlank(permission.getName());
     }
 }

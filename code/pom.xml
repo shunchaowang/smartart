@@ -44,6 +44,7 @@
         <commons-codec.version>1.10</commons-codec.version>
         <commons-lang.version>3.3.2</commons-lang.version>
         <commons-dhcp.version>1.4</commons-dhcp.version>
+        <commons-validator.version>1.6</commons-validator.version>
 
         <junit.version>4.11</junit.version>
         <hsqldb.version>2.3.2</hsqldb.version>

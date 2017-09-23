@@ -23,12 +23,4 @@ public interface GenericService<T extends Serializable, PK> {
     List<T> getAll();
 
     Long countAll();
-
-    /**
-     * Test if T is blank for the query.
-     *
-     * @param t null return false, all required fields are null return false.
-     * @return
-     */
-    Boolean isBlank(T t);
 }

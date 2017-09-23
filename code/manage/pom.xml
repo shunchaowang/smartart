@@ -9,7 +9,7 @@
     </parent>
     <artifactId>manage</artifactId>
     <packaging>war</packaging>
-    <name>Web Application Project</name>
+    <name>manage</name>
     <url>http://maven.apache.org</url>
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>
@@ -126,7 +126,11 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>${commons-validator.version}</version>
+        </dependency>
 
         <!-- jackson to handle xml and json support -->
         <!-- gson is used, so jackson not used right now

@@ -24,6 +24,7 @@ import java.util.List;
 public class UserStatusServiceImpl implements UserStatusService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserStatusServiceImpl.class);
+
     @Autowired
     private UserStatusDao userStatusDao;
 
@@ -183,18 +184,5 @@ public class UserStatusServiceImpl implements UserStatusService {
     @Override
     public Long countAll() {
         return userStatusDao.countAll();
-    }
-
-    /**
-     * Test if T is blank for the query.
-     *
-     * @param userStatus null return false, all required fields are null return false.
-     * @return
-     */
-    @Override
-    public Boolean isBlank(UserStatus userStatus) {
-        return userStatus == null && userStatus.getId() == null &&
-                userStatus.getActive() == null && StringUtils.isBlank(userStatus.getCode()) &&
-                StringUtils.isBlank(userStatus.getName());
     }
 }

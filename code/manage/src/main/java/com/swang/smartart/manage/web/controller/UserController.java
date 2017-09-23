@@ -37,8 +37,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -95,23 +102,74 @@ public class UserController {
         // if active == false means archive, no role
         // support ad hoc search on username only
         // support order on id and createdTime only
-        User includedUser = new User();
-        includedUser.setActive(true);
+//        User includedUser = new User();
+//        includedUser.setActive(true);
+//
+//        List<User> users = userService.findByCriteria(
+//                includedUser,
+//                params.getSearch(),
+//                Integer.valueOf(params.getOffset()),
+//                Integer.valueOf(params.getMax()), params.getOrder(),
+//                ResourceProperties.JpaOrderDir.valueOf(params.getOrderDir()));
+//
+//        // count total records
+//        Long recordsTotal = userService
+//                .countByCriteria(includedUser);
+//
+//        // count records filtered
+//        Long recordsFiltered = userService
+//                .countByCriteria(includedUser, params.getSearch());
 
-        List<User> users = userService.findByCriteria(
-                includedUser,
-                params.getSearch(),
-                Integer.valueOf(params.getOffset()),
-                Integer.valueOf(params.getMax()), params.getOrder(),
-                ResourceProperties.JpaOrderDir.valueOf(params.getOrderDir()));
 
-        // count total records
-        Long recordsTotal = userService
-                .countByCriteria(includedUser);
+        CriteriaBuilder builder = userService.getCriteriaBuilder();
+        CriteriaQuery<Long> countQuery = builder.createQuery(Long.class);
+        Root<User> root = countQuery.from(User.class);
+        countQuery.select(builder.count(root));
+        // we only cares about user inactive
+        Predicate activePredicate = builder.equal(root.<Boolean>get("active"),
+                builder.literal(true));
+        countQuery.where(activePredicate);
+        Long recordsTotal = userService.count(countQuery);
 
         // count records filtered
-        Long recordsFiltered = userService
-                .countByCriteria(includedUser, params.getSearch());
+        String likeSearch = "%" + params.getSearch() + "%";
+
+        // get all paths for the query
+        Path<String> usernamePath = root.get("username");
+        Path<String> firstNamePath = root.get("firstName");
+        Path<String> lastNamePath = root.get("lastName");
+        Path<String> emailPath = root.get("email");
+
+        // create the predicate expression for all the path
+        Predicate usernamePredicate = builder.like(usernamePath, likeSearch);
+        Predicate firstNamePredicate = builder.like(firstNamePath, likeSearch);
+        Predicate lastNamePredicate = builder.like(lastNamePath, likeSearch);
+        Predicate emailPredicate = builder.like(emailPath, likeSearch);
+
+        Predicate searchPredicate = builder.or(usernamePredicate, firstNamePredicate,
+                lastNamePredicate, emailPredicate);
+        countQuery.where(activePredicate, searchPredicate);
+        Long recordsFiltered = userService.count(countQuery);
+
+        // get all users
+        CriteriaQuery<User> userQuery = builder.createQuery(User.class);
+        Root<User> userRoot = userQuery.from(User.class);
+        userQuery.select(userRoot);
+        userQuery.where(activePredicate, searchPredicate);
+
+        // formulate orderBy
+        String order = params.getOrder();
+        if (StringUtils.isBlank(order)) {
+            order = "id";
+        }
+        String orderDirParam = params.getOrderDir();
+        if (StringUtils.isBlank(orderDirParam)) {
+            orderDirParam = ResourceProperties.JPA_ORDER_DESC;
+        }
+
+        userQuery.orderBy(orderUserBy(builder, root, order, orderDirParam));
+        List<User> users = userService.
+                find(userQuery, Integer.valueOf(params.getOffset(), Integer.valueOf(params.getMax())));
 
         if (users == null || recordsTotal == null || recordsFiltered == null) {
             throw new RemoteAjaxException("500", "Internal Server Error.");
@@ -145,22 +203,55 @@ public class UserController {
             throw new BadRequestException("400", "Bad Request.");
         }
 
-        User includedUser = new User();
-        includedUser.setActive(true);
+        CriteriaBuilder builder = userService.getCriteriaBuilder();
+        CriteriaQuery<Long> countQuery = builder.createQuery(Long.class);
+        Root<User> root = countQuery.from(User.class);
+        countQuery.select(builder.count(root));
+        // we only cares about user inactive
+        Predicate activePredicate = builder.equal(root.<Boolean>get("active"),
+                builder.literal(false));
+        countQuery.where(activePredicate);
+        Long recordsTotal = userService.count(countQuery);
 
-        List<User> users = userService.findByCriteria(
-                includedUser,
-                params.getSearch(),
-                Integer.valueOf(params.getOffset()),
-                Integer.valueOf(params.getMax()), params.getOrder(),
-                ResourceProperties.JpaOrderDir.valueOf(params.getOrderDir()));
-
-        // count total records
-        Long recordsTotal = userService
-                .countByCriteria(includedUser);
         // count records filtered
-        Long recordsFiltered = userService
-                .countByCriteria(includedUser, params.getSearch());
+        String likeSearch = "%" + params.getSearch() + "%";
+
+        // get all paths for the query
+        Path<String> usernamePath = root.get("username");
+        Path<String> firstNamePath = root.get("firstName");
+        Path<String> lastNamePath = root.get("lastName");
+        Path<String> emailPath = root.get("email");
+
+        // create the predicate expression for all the path
+        Predicate usernamePredicate = builder.like(usernamePath, likeSearch);
+        Predicate firstNamePredicate = builder.like(firstNamePath, likeSearch);
+        Predicate lastNamePredicate = builder.like(lastNamePath, likeSearch);
+        Predicate emailPredicate = builder.like(emailPath, likeSearch);
+
+        Predicate searchPredicate = builder.or(usernamePredicate, firstNamePredicate,
+                lastNamePredicate, emailPredicate);
+        countQuery.where(activePredicate, searchPredicate);
+        Long recordsFiltered = userService.count(countQuery);
+
+        // get all users
+        CriteriaQuery<User> userQuery = builder.createQuery(User.class);
+        Root<User> userRoot = userQuery.from(User.class);
+        userQuery.select(userRoot);
+        userQuery.where(activePredicate, searchPredicate);
+
+        // formulate orderBy
+        String order = params.getOrder();
+        if (StringUtils.isBlank(order)) {
+            order = "id";
+        }
+        String orderDirParam = params.getOrderDir();
+        if (StringUtils.isBlank(orderDirParam)) {
+            orderDirParam = ResourceProperties.JPA_ORDER_DESC;
+        }
+
+        userQuery.orderBy(orderUserBy(builder, root, order, orderDirParam));
+        List<User> users = userService.
+                find(userQuery, Integer.valueOf(params.getOffset(), Integer.valueOf(params.getMax())));
 
         if (users == null || recordsTotal == null || recordsFiltered == null) {
             throw new RemoteAjaxException("500", "Internal Server Error.");
@@ -360,4 +451,68 @@ public class UserController {
         return user;
     }
 
+    private Order orderUserBy(CriteriaBuilder builder, Root<User> root, String order, String orderDir) {
+        Order orderBy = null;
+        Path<Long> idPath = root.get("id");
+        Path<Date> createdTimePath = root.get("createdTime");
+        Path<String> usernamePath = root.get("username");
+        Path<String> firstNamePath = root.get("firstName");
+        Path<String> lastNamePath = root.get("lastName");
+        Path<String> emailPath = root.get("email");
+        switch (orderDir) {
+            case "ASC":
+                switch (order) {
+                    case "id":
+                        orderBy = builder.asc(idPath);
+                        break;
+                    case "username":
+                        orderBy = builder.asc(usernamePath);
+                        break;
+                    case "firstName":
+                        orderBy = builder.asc(firstNamePath);
+                        break;
+                    case "lastName":
+                        orderBy = builder.asc(lastNamePath);
+                        break;
+                    case "email":
+                        orderBy = builder.asc(emailPath);
+                        break;
+                    case "createdTime":
+                        orderBy = builder.asc(createdTimePath);
+                        break;
+                    default:
+                        orderBy = builder.asc(idPath);
+                }
+                break;
+            case "DESC":
+                switch (order) {
+                    case "id":
+                        orderBy = builder.desc(idPath);
+                        break;
+                    case "username":
+                        orderBy = builder.desc(usernamePath);
+                        break;
+                    case "firstName":
+                        orderBy = builder.desc(firstNamePath);
+                        break;
+                    case "lastName":
+                        orderBy = builder.desc(lastNamePath);
+                        break;
+                    case "email":
+                        orderBy = builder.desc(emailPath);
+                        break;
+                    case "createdTime":
+                        orderBy = builder.desc(createdTimePath);
+                        break;
+                    default:
+                        orderBy = builder.desc(idPath);
+                }
+                break;
+            default:
+                orderBy = builder.desc(idPath);
+                break;
+        }
+
+        return orderBy;
+    }
 }

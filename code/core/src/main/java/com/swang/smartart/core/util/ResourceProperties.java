@@ -19,18 +19,7 @@ public abstract class ResourceProperties {
     public static final String USER_STATUS_DEACTIVATED_CODE = "400";
     public static final String USER_STATUS_FROZEN_CODE = "501";
 
-    public enum JpaOrderDir {
-        ASC("ASC"),
-        DESC("DESC");
+    public static final String JPA_ORDER_ASC = "ASC";
+    public static final String JPA_ORDER_DESC = "DESC";
 
-        private final String dir;
-
-        JpaOrderDir(String dir) {
-            this.dir = dir;
-        }
-
-        public String getDir() {
-            return dir;
-        }
-    }
 }
