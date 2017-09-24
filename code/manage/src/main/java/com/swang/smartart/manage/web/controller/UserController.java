@@ -98,28 +98,6 @@ public class UserController {
                 || params.getOrder() == null || params.getOrderDir() == null) {
             throw new BadRequestException("400", "Bad Request.");
         }
-        // formulate criteria query
-        // if active == false means archive, no role
-        // support ad hoc search on username only
-        // support order on id and createdTime only
-//        User includedUser = new User();
-//        includedUser.setActive(true);
-//
-//        List<User> users = userService.findByCriteria(
-//                includedUser,
-//                params.getSearch(),
-//                Integer.valueOf(params.getOffset()),
-//                Integer.valueOf(params.getMax()), params.getOrder(),
-//                ResourceProperties.JpaOrderDir.valueOf(params.getOrderDir()));
-//
-//        // count total records
-//        Long recordsTotal = userService
-//                .countByCriteria(includedUser);
-//
-//        // count records filtered
-//        Long recordsFiltered = userService
-//                .countByCriteria(includedUser, params.getSearch());
-
 
         CriteriaBuilder builder = userService.getCriteriaBuilder();
         CriteriaQuery<Long> countQuery = builder.createQuery(Long.class);
@@ -169,7 +147,7 @@ public class UserController {
 
         userQuery.orderBy(orderUserBy(builder, root, order, orderDirParam));
         List<User> users = userService.
-                find(userQuery, Integer.valueOf(params.getOffset(), Integer.valueOf(params.getMax())));
+                find(userQuery, Integer.valueOf(params.getOffset()), Integer.valueOf(params.getMax()));
 
         if (users == null || recordsTotal == null || recordsFiltered == null) {
             throw new RemoteAjaxException("500", "Internal Server Error.");
