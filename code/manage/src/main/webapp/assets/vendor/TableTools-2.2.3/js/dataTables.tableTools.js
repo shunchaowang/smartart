@@ -881,8 +881,8 @@ var TableTools;
                  */
                 "fnSelectAll": function (filtered) {
                     this._fnRowSelect(filtered ?
-                            this.s.dt.aiDisplay :
-                            this.s.dt.aoData
+                        this.s.dt.aiDisplay :
+                        this.s.dt.aoData
                     );
                 },
 
@@ -2942,8 +2942,8 @@ var TableTools;
                     "fnInit": function (oDTSettings) {
                         var init = oDTSettings.oInit;
                         var opts = init ?
-                        init.tableTools || init.oTableTools || {} :
-                        {};
+                            init.tableTools || init.oTableTools || {} :
+                            {};
 
                         return new TableTools(oDTSettings.oInstance, opts).dom.container;
                     },

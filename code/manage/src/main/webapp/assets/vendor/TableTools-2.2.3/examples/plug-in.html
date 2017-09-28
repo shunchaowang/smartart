@@ -26,16 +26,16 @@
 
 
         $.fn.dataTable.TableTools.buttons.copy_to_div = $.extend(
-                true,
-                $.fn.dataTable.TableTools.buttonBase,
-                {
-                    "sNewLine": "<br>",
-                    "sButtonText": "Copy to element",
-                    "target": "",
-                    "fnClick": function (button, conf) {
-                        $(conf.target).html(this.fnGetTableData(conf));
-                    }
+            true,
+            $.fn.dataTable.TableTools.buttonBase,
+            {
+                "sNewLine": "<br>",
+                "sButtonText": "Copy to element",
+                "target": "",
+                "fnClick": function (button, conf) {
+                    $(conf.target).html(this.fnGetTableData(conf));
                 }
+            }
         );
 
         $(document).ready(function () {

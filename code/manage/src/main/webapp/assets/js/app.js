@@ -6,6 +6,7 @@ function autoCloseAlert() {
         });
     }, 5000);
 }
+
 $(document).ready(function () {
     autoCloseAlert();
 });

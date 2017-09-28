@@ -103,15 +103,15 @@
                     'name': 'operation', 'targets': 7, 'searchable': false, 'orderable': false,
                     'render': function (data, type, row) {
                         return '<button type="button" name="restore-button"'
-                                + ' data-identity="' + row['username'] + '"'
-                                + ' class="btn btn-default" value="' + row['id'] + '">' +
-                                "${restoreLabel}"
-                                + '</button>'
-                                + '<button type="button" name="delete-button"'
-                                + ' data-identity="' + row['username'] + '"'
-                                + ' class="btn btn-default" value="' + row['id'] + '">' +
-                                "${deleteLabel}"
-                                + '</button>';
+                            + ' data-identity="' + row['username'] + '"'
+                            + ' class="btn btn-default" value="' + row['id'] + '">' +
+                            "${restoreLabel}"
+                            + '</button>'
+                            + '<button type="button" name="delete-button"'
+                            + ' data-identity="' + row['username'] + '"'
+                            + ' class="btn btn-default" value="' + row['id'] + '">' +
+                            "${deleteLabel}"
+                            + '</button>';
                     }
                 }
             ]
@@ -144,12 +144,12 @@
                             },
                             success: function (data) {
                                 var alert = "<div class='alert alert-warning alert-dismissible' role='alert'>" +
-                                        "<button type='button' class='close' data-dismiss='alert'>" +
-                                        "<span aria-hidden='true'>&times;</span>" +
-                                        "<span class='sr-only'>"
-                                        + "<spring:message code='action.close.label'/> "
-                                        + "</span></button>"
-                                        + data.message + "</div>";
+                                    "<button type='button' class='close' data-dismiss='alert'>" +
+                                    "<span aria-hidden='true'>&times;</span>" +
+                                    "<span class='sr-only'>"
+                                    + "<spring:message code='action.close.label'/> "
+                                    + "</span></button>"
+                                    + data.message + "</div>";
                                 $('#notification').append(alert);
                                 userTable.ajax.reload();
                             }
@@ -189,12 +189,12 @@
                             },
                             success: function (data) {
                                 var alert = "<div class='alert alert-warning alert-dismissible' role='alert'>" +
-                                        "<button type='button' class='close' data-dismiss='alert'>" +
-                                        "<span aria-hidden='true'>&times;</span>" +
-                                        "<span class='sr-only'>"
-                                        + "<spring:message code='action.close.label'/> "
-                                        + "</span></button>"
-                                        + data.message + "</div>";
+                                    "<button type='button' class='close' data-dismiss='alert'>" +
+                                    "<span aria-hidden='true'>&times;</span>" +
+                                    "<span class='sr-only'>"
+                                    + "<spring:message code='action.close.label'/> "
+                                    + "</span></button>"
+                                    + data.message + "</div>";
                                 $('#notification').append(alert);
                                 userTable.ajax.reload();
                             }

@@ -1,13 +1,10 @@
-package com.swang.smartart.core.service.impl;
+package com.swang.smartart.core.service;
 
-import com.swang.smartart.core.service.GenericQueryService;
-import com.swang.smartart.core.util.ResourceProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
 import java.util.List;

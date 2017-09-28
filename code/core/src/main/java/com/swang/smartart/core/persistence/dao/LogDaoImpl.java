@@ -1,6 +1,5 @@
-package com.swang.smartart.core.persistence.dao.impl;
+package com.swang.smartart.core.persistence.dao;
 
-import com.swang.smartart.core.persistence.dao.LogDao;
 import com.swang.smartart.core.persistence.entity.Log;
 import org.springframework.stereotype.Repository;
 

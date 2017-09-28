@@ -1,6 +1,5 @@
-package com.swang.smartart.core.persistence.dao.impl;
+package com.swang.smartart.core.persistence.dao;
 
-import com.swang.smartart.core.persistence.dao.UserStatusDao;
 import com.swang.smartart.core.persistence.entity.UserStatus;
 import org.springframework.stereotype.Repository;
 

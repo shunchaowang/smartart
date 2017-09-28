@@ -1,6 +1,5 @@
-package com.swang.smartart.core.persistence.dao.impl;
+package com.swang.smartart.core.persistence.dao;
 
-import com.swang.smartart.core.persistence.dao.GenericLookupDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
