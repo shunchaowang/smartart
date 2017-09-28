@@ -97,7 +97,7 @@
                     'orderable': false,
                     'render': function (data, type, row) {
                         return '<a href=' + "${rootURL}user" + '/show/'
-                                + row['id'] + '>' + data + '</a>';
+                            + row['id'] + '>' + data + '</a>';
                     }
                 },
                 {
@@ -121,14 +121,14 @@
                     'name': 'operation', 'targets': 7, 'searchable': false, 'orderable': false,
                     'render': function (data, type, row) {
                         var operations = '<button type="button" name="edit-button" '
-                                + 'class="btn btn-default" value="' + row['id'] + '">'
-                                + '<spring:message code="action.edit.label"/>'
-                                + '</button>';
+                            + 'class="btn btn-default" value="' + row['id'] + '">'
+                            + '<spring:message code="action.edit.label"/>'
+                            + '</button>';
                         operations += '<button type="button" name="archive-button"'
-                                + ' data-username="' + row['username'] + '"'
-                                + ' class="btn btn-default" value="' + row['id'] + '">' +
-                                "${archiveLabel}"
-                                + '</button>';
+                            + ' data-username="' + row['username'] + '"'
+                            + ' class="btn btn-default" value="' + row['id'] + '">' +
+                            "${archiveLabel}"
+                            + '</button>';
                         return operations;
                     }
                 }
@@ -137,7 +137,7 @@
 
         // add live handler for edit button
         userTable.on('click', 'button[type=button][name=edit-button]', function
-                (event) {
+            (event) {
             event.preventDefault();
             $.ajax({
                 type: 'get',
@@ -188,12 +188,12 @@
                             },
                             success: function (data) {
                                 var alert = "<div class='alert alert-warning alert-dismissible' role='alert'>" +
-                                        "<button type='button' class='close' data-dismiss='alert'>" +
-                                        "<span aria-hidden='true'>&times;</span>" +
-                                        "<span class='sr-only'>"
-                                        + "<spring:message code='action.close.label'/> "
-                                        + "</span></button>"
-                                        + data.message + "</div>";
+                                    "<button type='button' class='close' data-dismiss='alert'>" +
+                                    "<span aria-hidden='true'>&times;</span>" +
+                                    "<span class='sr-only'>"
+                                    + "<spring:message code='action.close.label'/> "
+                                    + "</span></button>"
+                                    + data.message + "</div>";
                                 $('#notification').append(alert);
                                 userDialog.dialog("close");
                                 userTable.ajax.reload();
@@ -231,12 +231,12 @@
                             },
                             success: function (data) {
                                 var alert = "<div class='alert alert-warning alert-dismissible' role='alert'>" +
-                                        "<button type='button' class='close' data-dismiss='alert'>" +
-                                        "<span aria-hidden='true'>&times;</span>" +
-                                        "<span class='sr-only'>"
-                                        + "<spring:message code='action.close.label'/> "
-                                        + "</span></button>"
-                                        + data.message + "</div>";
+                                    "<button type='button' class='close' data-dismiss='alert'>" +
+                                    "<span aria-hidden='true'>&times;</span>" +
+                                    "<span class='sr-only'>"
+                                    + "<spring:message code='action.close.label'/> "
+                                    + "</span></button>"
+                                    + data.message + "</div>";
                                 $('#notification').append(alert);
                                 userTable.ajax.reload();
                             }

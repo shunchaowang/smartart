@@ -1,6 +1,5 @@
-package com.swang.smartart.core.persistence.dao.impl;
+package com.swang.smartart.core.persistence.dao;
 
-import com.swang.smartart.core.persistence.dao.GenericDao;
 import com.swang.smartart.core.util.ResourceProperties;
 import org.hibernate.Query;
 import org.slf4j.Logger;

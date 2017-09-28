@@ -1,6 +1,5 @@
 package com.swang.smartart.manage.config;
 
-import com.swang.smartart.core.persistence.entity.Permission;
 import com.swang.smartart.core.persistence.entity.Role;
 import com.swang.smartart.core.persistence.entity.User;
 import com.swang.smartart.core.util.ResourceProperties;

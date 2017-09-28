@@ -16,6 +16,12 @@ public class Menu implements Comparable<Menu> {
 
     private List<SubMenu> subMenus;
 
+    public Menu(MenuCategory menuCategory) {
+        name = menuCategory.getName();
+        index = menuCategory.getIndex().intValue();
+        subMenus = new ArrayList<>();
+    }
+
     public String getName() {
         return name;
     }
@@ -38,12 +44,6 @@ public class Menu implements Comparable<Menu> {
 
     public void setSubMenus(List<SubMenu> subMenus) {
         this.subMenus = subMenus;
-    }
-
-    public Menu(MenuCategory menuCategory) {
-        name = menuCategory.getName();
-        index = menuCategory.getIndex().intValue();
-        subMenus = new ArrayList<>();
     }
 
     /**

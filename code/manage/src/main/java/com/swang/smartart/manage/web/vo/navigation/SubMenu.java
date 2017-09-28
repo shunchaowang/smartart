@@ -11,6 +11,12 @@ public class SubMenu implements Comparable<SubMenu> {
     private Integer index;
     private String target;
 
+    public SubMenu(MenuItem menuItem) {
+        name = menuItem.getName();
+        index = menuItem.getIndex().intValue();
+        target = menuItem.getTarget();
+    }
+
     public String getName() {
         return name;
     }
@@ -33,12 +39,6 @@ public class SubMenu implements Comparable<SubMenu> {
 
     public void setTarget(String target) {
         this.target = target;
-    }
-
-    public SubMenu(MenuItem menuItem) {
-        name = menuItem.getName();
-        index = menuItem.getIndex().intValue();
-        target = menuItem.getTarget();
     }
 
     /**

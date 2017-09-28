@@ -484,22 +484,22 @@
                     overflow: 'hidden'
                 })
                 .append(
-                $('<div/>')
-                    .css({
-                        position: 'absolute',
-                        top: 1,
-                        left: 1,
-                        width: 100,
-                        overflow: 'scroll'
-                    })
-                    .append(
-                    $('<div class="test"/>')
+                    $('<div/>')
                         .css({
-                            width: '100%',
-                            height: 10
+                            position: 'absolute',
+                            top: 1,
+                            left: 1,
+                            width: 100,
+                            overflow: 'scroll'
                         })
+                        .append(
+                            $('<div class="test"/>')
+                                .css({
+                                    width: '100%',
+                                    height: 10
+                                })
+                        )
                 )
-            )
                 .appendTo('body');
 
             var test = n.find('.test');
@@ -649,8 +649,8 @@
                 return typeof src === 'string' && src.indexOf('@') !== -1;
             };
             oCol._bAttrSrc = $.isPlainObject(mDataSrc) && (
-                    attrTest(mDataSrc.sort) || attrTest(mDataSrc.type) || attrTest(mDataSrc.filter)
-                );
+                attrTest(mDataSrc.sort) || attrTest(mDataSrc.type) || attrTest(mDataSrc.filter)
+            );
 
             oCol.fnGetData = function (rowData, type, meta) {
                 var innerData = mData(rowData, type, undefined, meta);
@@ -1134,7 +1134,7 @@
                 };
             }
             else if (typeof mSource === 'string' && (mSource.indexOf('.') !== -1 ||
-                mSource.indexOf('[') !== -1 || mSource.indexOf('(') !== -1)) {
+                    mSource.indexOf('[') !== -1 || mSource.indexOf('(') !== -1)) {
                 /* If there is a . in the source string then the data source is in a
                  * nested object so we loop over the data for each level to get the next
                  * level down. On each loop we test for undefined, and if found immediately
@@ -1237,7 +1237,7 @@
                 };
             }
             else if (typeof mSource === 'string' && (mSource.indexOf('.') !== -1 ||
-                mSource.indexOf('[') !== -1 || mSource.indexOf('(') !== -1)) {
+                    mSource.indexOf('[') !== -1 || mSource.indexOf('(') !== -1)) {
                 /* Like the get, we need to get data from a nested object */
                 var setData = function (data, val, src) {
                     var a = _fnSplitObjNotation(src), b;
@@ -2555,7 +2555,7 @@
             var str = language.sSearch;
             str = str.match(/_INPUT_/) ?
                 str.replace('_INPUT_', input) :
-            str + input;
+                str + input;
 
             var filter = $('<div/>', {
                 'id': !features.f ? tableId + '_filter' : null,
@@ -2593,11 +2593,11 @@
                 .val(previousSearch.sSearch)
                 .attr('placeholder', language.sSearchPlaceholder)
                 .bind(
-                'keyup.DT search.DT input.DT paste.DT cut.DT',
-                searchDelay ?
-                    _fnThrottle(searchFn, searchDelay) :
-                    searchFn
-            )
+                    'keyup.DT search.DT input.DT paste.DT cut.DT',
+                    searchDelay ?
+                        _fnThrottle(searchFn, searchDelay) :
+                        searchFn
+                )
                 .bind('keypress.DT', function (e) {
                     /* Prevent form submission */
                     if (e.keyCode == 13) {
@@ -3025,13 +3025,7 @@
                 vis = settings.fnRecordsDisplay(),
                 all = len === -1;
 
-            return str.
-                replace(/_START_/g, formatter.call(settings, start)).
-                replace(/_END_/g, formatter.call(settings, settings.fnDisplayEnd())).
-                replace(/_MAX_/g, formatter.call(settings, settings.fnRecordsTotal())).
-                replace(/_TOTAL_/g, formatter.call(settings, vis)).
-                replace(/_PAGE_/g, formatter.call(settings, all ? 1 : Math.ceil(start / len))).
-                replace(/_PAGES_/g, formatter.call(settings, all ? 1 : Math.ceil(vis / len)));
+            return str.replace(/_START_/g, formatter.call(settings, start)).replace(/_END_/g, formatter.call(settings, settings.fnDisplayEnd())).replace(/_MAX_/g, formatter.call(settings, settings.fnRecordsTotal())).replace(/_TOTAL_/g, formatter.call(settings, vis)).replace(/_PAGE_/g, formatter.call(settings, all ? 1 : Math.ceil(start / len))).replace(/_PAGES_/g, formatter.call(settings, all ? 1 : Math.ceil(vis / len)));
         }
 
 
@@ -3291,7 +3285,7 @@
             }
             else if (action == "previous") {
                 start = len >= 0 ?
-                start - len :
+                    start - len :
                     0;
 
                 if (start < 0) {
@@ -3420,39 +3414,39 @@
              */
             var scroller = $(_div, {'class': classes.sScrollWrapper})
                 .append(
-                $(_div, {'class': classes.sScrollHead})
-                    .css({
-                        overflow: 'hidden',
-                        position: 'relative',
-                        border: 0,
-                        width: scrollX ? size(scrollX) : '100%'
-                    })
-                    .append(
-                    $(_div, {'class': classes.sScrollHeadInner})
+                    $(_div, {'class': classes.sScrollHead})
                         .css({
-                            'box-sizing': 'content-box',
-                            width: scroll.sXInner || '100%'
+                            overflow: 'hidden',
+                            position: 'relative',
+                            border: 0,
+                            width: scrollX ? size(scrollX) : '100%'
                         })
                         .append(
-                        headerClone
-                            .removeAttr('id')
-                            .css('margin-left', 0)
-                            .append(captionSide === 'top' ? caption : null)
-                            .append(
-                            table.children('thead')
+                            $(_div, {'class': classes.sScrollHeadInner})
+                                .css({
+                                    'box-sizing': 'content-box',
+                                    width: scroll.sXInner || '100%'
+                                })
+                                .append(
+                                    headerClone
+                                        .removeAttr('id')
+                                        .css('margin-left', 0)
+                                        .append(captionSide === 'top' ? caption : null)
+                                        .append(
+                                            table.children('thead')
+                                        )
+                                )
                         )
-                    )
                 )
-            )
                 .append(
-                $(_div, {'class': classes.sScrollBody})
-                    .css({
-                        overflow: 'auto',
-                        height: size(scrollY),
-                        width: size(scrollX)
-                    })
-                    .append(table)
-            );
+                    $(_div, {'class': classes.sScrollBody})
+                        .css({
+                            overflow: 'auto',
+                            height: size(scrollY),
+                            width: size(scrollX)
+                        })
+                        .append(table)
+                );
 
             if (footer) {
                 scroller.append(
@@ -3463,17 +3457,17 @@
                             width: scrollX ? size(scrollX) : '100%'
                         })
                         .append(
-                        $(_div, {'class': classes.sScrollFootInner})
-                            .append(
-                            footerClone
-                                .removeAttr('id')
-                                .css('margin-left', 0)
-                                .append(captionSide === 'bottom' ? caption : null)
+                            $(_div, {'class': classes.sScrollFootInner})
                                 .append(
-                                table.children('tfoot')
-                            )
+                                    footerClone
+                                        .removeAttr('id')
+                                        .css('margin-left', 0)
+                                        .append(captionSide === 'bottom' ? caption : null)
+                                        .append(
+                                            table.children('tfoot')
+                                        )
+                                )
                         )
-                    )
                 );
             }
 
@@ -3625,7 +3619,7 @@
                 // - which is shouldn't. When there is a scrollbar we need to take this
                 // into account.
                 if (ie67 && (table.find('tbody').height() > divBodyEl.offsetHeight ||
-                    divBody.css('overflow-y') == "scroll")
+                        divBody.css('overflow-y') == "scroll")
                 ) {
                     tableStyle.width = _fnStringToCss(table.outerWidth() - barWidth);
                 }
@@ -3715,13 +3709,13 @@
             if (table.outerWidth() < sanityWidth) {
                 // The min width depends upon if we have a vertical scrollbar visible or not */
                 correction = ((divBodyEl.scrollHeight > divBodyEl.offsetHeight ||
-                divBody.css('overflow-y') == "scroll")) ?
-                sanityWidth + barWidth :
+                    divBody.css('overflow-y') == "scroll")) ?
+                    sanityWidth + barWidth :
                     sanityWidth;
 
                 // IE6/7 are a law unto themselves...
                 if (ie67 && (divBodyEl.scrollHeight >
-                    divBodyEl.offsetHeight || divBody.css('overflow-y') == "scroll")
+                        divBodyEl.offsetHeight || divBody.css('overflow-y') == "scroll")
                 ) {
                     tableStyle.width = _fnStringToCss(correction - barWidth);
                 }
@@ -3963,7 +3957,7 @@
 
                         total += column.sWidthOrig === null ?
                             outerWidth :
-                        parseInt(column.sWidth, 10) + outerWidth - $(headerCells[i]).width();
+                            parseInt(column.sWidth, 10) + outerWidth - $(headerCells[i]).width();
                     }
 
                     tmpTable.width(_fnStringToCss(total));
@@ -4144,12 +4138,12 @@
             if (typeof s == 'number') {
                 return s < 0 ?
                     '0px' :
-                s + 'px';
+                    s + 'px';
             }
 
             // Check it has a unit character already
             return s.match(/\d$/) ?
-            s + 'px' :
+                s + 'px' :
                 s;
         }
 
@@ -4423,9 +4417,9 @@
                     }
 
                     label = sTitle + ( nextSort === "asc" ?
-                                oAria.sSortAscending :
-                                oAria.sSortDescending
-                        );
+                            oAria.sSortAscending :
+                            oAria.sSortDescending
+                    );
                 }
                 else {
                     label = sTitle;
@@ -4458,7 +4452,7 @@
                 }
 
                 return idx + 1 < asSorting.length ?
-                idx + 1 :
+                    idx + 1 :
                     overflow ?
                         null :
                         0;
@@ -4713,8 +4707,8 @@
             // Order
             $.each(state.order, function (i, col) {
                 settings.aaSorting.push(col[0] >= columns.length ?
-                        [0, col[1]] :
-                        col
+                    [0, col[1]] :
+                    col
                 );
             });
 
@@ -5412,7 +5406,7 @@
 
                     return col !== undefined || type == 'td' || type == 'th' ?
                         api.cell(src, col).data() :
-                    api.row(src).data() || null;
+                        api.row(src).data() || null;
                 }
 
                 return api.data().toArray();
@@ -6665,7 +6659,7 @@
                 obj[struct.name] = typeof struct.val === 'function' ?
                     methodScoping(scope, struct.val, struct) :
                     $.isPlainObject(struct.val) ?
-                    {} :
+                        {} :
                         struct.val;
 
                 obj[struct.name].__dt_wrapper = true;
@@ -7487,7 +7481,7 @@
             var ctx = this.context;
 
             return ctx.length && this.length ?
-            ctx[0].aoData[this[0]].nTr || null :
+                ctx[0].aoData[this[0]].nTr || null :
                 null;
         });
 
@@ -7772,7 +7766,7 @@
                 if (selInt !== null) {
                     return [selInt >= 0 ?
                         selInt : // Count from left
-                    columns.length + selInt // Count from right (+ because its a negative value)
+                        columns.length + selInt // Count from right (+ because its a negative value)
                     ];
                 }
 
@@ -12960,7 +12954,7 @@
              */
             "fnRecordsTotal": function () {
                 return _fnDataSource(this) == 'ssp' ?
-                this._iRecordsTotal * 1 :
+                    this._iRecordsTotal * 1 :
                     this.aiDisplayMaster.length;
             },
 
@@ -12970,7 +12964,7 @@
              */
             "fnRecordsDisplay": function () {
                 return _fnDataSource(this) == 'ssp' ?
-                this._iRecordsDisplay * 1 :
+                    this._iRecordsDisplay * 1 :
                     this.aiDisplay.length;
             },
 
@@ -12989,7 +12983,7 @@
 
                 if (features.bServerSide) {
                     return paginate === false || len === -1 ?
-                    start + records :
+                        start + records :
                         Math.min(start + len, this._iRecordsDisplay);
                 }
                 else {
@@ -13754,25 +13748,25 @@
                                     case 'first':
                                         btnDisplay = lang.sFirst;
                                         btnClass = button + (page > 0 ?
-                                                '' : ' ' + classes.sPageButtonDisabled);
+                                            '' : ' ' + classes.sPageButtonDisabled);
                                         break;
 
                                     case 'previous':
                                         btnDisplay = lang.sPrevious;
                                         btnClass = button + (page > 0 ?
-                                                '' : ' ' + classes.sPageButtonDisabled);
+                                            '' : ' ' + classes.sPageButtonDisabled);
                                         break;
 
                                     case 'next':
                                         btnDisplay = lang.sNext;
                                         btnClass = button + (page < pages - 1 ?
-                                                '' : ' ' + classes.sPageButtonDisabled);
+                                            '' : ' ' + classes.sPageButtonDisabled);
                                         break;
 
                                     case 'last':
                                         btnDisplay = lang.sLast;
                                         btnClass = button + (page < pages - 1 ?
-                                                '' : ' ' + classes.sPageButtonDisabled);
+                                            '' : ' ' + classes.sPageButtonDisabled);
                                         break;
 
                                     default:
@@ -13789,7 +13783,7 @@
                                         'data-dt-idx': counter,
                                         'tabindex': settings.iTabIndex,
                                         'id': idx === 0 && typeof button === 'string' ?
-                                        settings.sTableId + '_' + button :
+                                            settings.sTableId + '_' + button :
                                             null
                                     })
                                         .html(btnDisplay)
@@ -13983,7 +13977,7 @@
                     '' :
                     a.replace ?
                         a.replace(/<.*?>/g, "").toLowerCase() :
-                    a + '';
+                        a + '';
             },
 
             // string
@@ -14032,15 +14026,15 @@
 
                         cell
                             .removeClass(
-                            column.sSortingClass + ' ' +
-                            classes.sSortAsc + ' ' +
-                            classes.sSortDesc
-                        )
+                                column.sSortingClass + ' ' +
+                                classes.sSortAsc + ' ' +
+                                classes.sSortDesc
+                            )
                             .addClass(columns[colIdx] == 'asc' ?
                                 classes.sSortAsc : columns[colIdx] == 'desc' ?
-                                classes.sSortDesc :
-                                column.sSortingClass
-                        );
+                                    classes.sSortDesc :
+                                    column.sSortingClass
+                            );
                     });
                 },
 
@@ -14050,7 +14044,7 @@
                         .append(cell.contents())
                         .append($('<span/>')
                             .addClass(classes.sSortIcon + ' ' + column.sSortingClassJUI)
-                    )
+                        )
                         .appendTo(cell);
 
                     // Attach a sort listener to update on sort
@@ -14065,24 +14059,24 @@
                             .removeClass(classes.sSortAsc + " " + classes.sSortDesc)
                             .addClass(columns[colIdx] == 'asc' ?
                                 classes.sSortAsc : columns[colIdx] == 'desc' ?
-                                classes.sSortDesc :
-                                column.sSortingClass
-                        );
+                                    classes.sSortDesc :
+                                    column.sSortingClass
+                            );
 
                         cell
                             .find('span.' + classes.sSortIcon)
                             .removeClass(
-                            classes.sSortJUIAsc + " " +
-                            classes.sSortJUIDesc + " " +
-                            classes.sSortJUI + " " +
-                            classes.sSortJUIAscAllowed + " " +
-                            classes.sSortJUIDescAllowed
-                        )
+                                classes.sSortJUIAsc + " " +
+                                classes.sSortJUIDesc + " " +
+                                classes.sSortJUI + " " +
+                                classes.sSortJUIAscAllowed + " " +
+                                classes.sSortJUIDescAllowed
+                            )
                             .addClass(columns[colIdx] == 'asc' ?
                                 classes.sSortJUIAsc : columns[colIdx] == 'desc' ?
-                                classes.sSortJUIDesc :
-                                column.sSortingClassJUI
-                        );
+                                    classes.sSortJUIDesc :
+                                    column.sSortingClassJUI
+                            );
                     });
                 }
             }
@@ -14127,7 +14121,7 @@
 
                         var intPart = parseInt(d, 10);
                         var floatPart = precision ?
-                        decimal + (d - intPart).toFixed(precision).substring(2) :
+                            decimal + (d - intPart).toFixed(precision).substring(2) :
                             '';
 
                         return negative + (prefix || '') +
