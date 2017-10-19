@@ -31,7 +31,7 @@
             <!-- end of navbar header -->
 
             <!-- use this if going with role based authorization -->
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <sec:authorize access="hasAuthority('ROLE_ADMIN')">
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="#">
