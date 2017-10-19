@@ -18,7 +18,7 @@ public class Permission implements Serializable {
     @Column(name = "PRMS_ID")
     private Long id;
 
-    @Column(name = "PRMS_NAME", length = 64, nullable = false)
+    @Column(name = "PRMS_NAME", length = 64, nullable = false, unique = true)
     private String name;
 
     @Column(name = "PRMS_DESCRIPTION", length = 255)
