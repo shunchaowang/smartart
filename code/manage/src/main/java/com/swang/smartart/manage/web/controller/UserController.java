@@ -58,7 +58,9 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     // index view
-    @PreAuthorize("isAuthenticated() and hasRole('ROLE_ADMIN')")
+    // Role and Authority are the same, hasRole and hasAuthority are the same as well.
+    // hasAuthority('ROLE_ADMIN') has same result with hasRole('ROLE_ADMIN')
+    @PreAuthorize("isAuthenticated() and hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = {"/indexAll"}, method = RequestMethod.GET)
     public String indexAll(Model model) {
         model.addAttribute("_view", "user/indexAll");
