@@ -1,11 +1,10 @@
-package com.swang.smartart.core.service.impl;
+package com.swang.smartart.core.service;
 
 import com.swang.smartart.core.exception.MissingRequiredFieldException;
 import com.swang.smartart.core.exception.NoSuchEntityException;
 import com.swang.smartart.core.exception.NotUniqueException;
 import com.swang.smartart.core.persistence.dao.RoleDao;
 import com.swang.smartart.core.persistence.entity.Role;
-import com.swang.smartart.core.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

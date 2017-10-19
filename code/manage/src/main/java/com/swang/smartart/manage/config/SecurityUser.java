@@ -1,6 +1,5 @@
 package com.swang.smartart.manage.config;
 
-import com.swang.smartart.core.persistence.entity.Permission;
 import com.swang.smartart.core.persistence.entity.Role;
 import com.swang.smartart.core.persistence.entity.User;
 import com.swang.smartart.core.util.ResourceProperties;
@@ -31,7 +30,7 @@ public class SecurityUser extends User implements UserDetails {
             this.setLastName(user.getLastName());
             this.setActive(user.getActive());
             this.setUserStatus(user.getUserStatus());
-            this.setPermissions(new HashSet<Permission>());
+            this.setPermissions(new HashSet<>());
 
             // set user's permissions
             if (user.getPermissions() != null) {
@@ -49,7 +48,7 @@ public class SecurityUser extends User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
         Set<Role> roles = this.getRoles();
 
         if (roles != null) {

@@ -1,14 +1,12 @@
-package com.swang.smartart.core.service.impl;
+package com.swang.smartart.core.service;
 
 import com.swang.smartart.core.exception.MissingRequiredFieldException;
 import com.swang.smartart.core.exception.NoSuchEntityException;
 import com.swang.smartart.core.exception.NotUniqueException;
 import com.swang.smartart.core.persistence.dao.UserDao;
 import com.swang.smartart.core.persistence.dao.UserStatusDao;
-import com.swang.smartart.core.persistence.entity.Role;
 import com.swang.smartart.core.persistence.entity.User;
 import com.swang.smartart.core.persistence.entity.UserStatus;
-import com.swang.smartart.core.service.UserService;
 import com.swang.smartart.core.util.ResourceProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -17,21 +15,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Order;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by swang on 3/12/2015.
- * Modified by Linly on 3/15/2015.
  */
 @Service("userService")
 public class UserServiceImpl extends GenericQueryServiceImpl<User, Long> implements UserService {

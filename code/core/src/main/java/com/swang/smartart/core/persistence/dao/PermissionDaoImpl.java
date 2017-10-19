@@ -1,6 +1,5 @@
-package com.swang.smartart.core.persistence.dao.impl;
+package com.swang.smartart.core.persistence.dao;
 
-import com.swang.smartart.core.persistence.dao.PermissionDao;
 import com.swang.smartart.core.persistence.entity.Permission;
 import org.springframework.stereotype.Repository;
 

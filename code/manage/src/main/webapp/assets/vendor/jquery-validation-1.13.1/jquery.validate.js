@@ -61,6 +61,7 @@
                         // prevent form submit to be able to see console output
                         event.preventDefault();
                     }
+
                     function handle() {
                         var hidden, result;
                         if (validator.settings.submitHandler) {
@@ -369,11 +370,11 @@
 
                 $(this.currentForm)
                     .validateDelegate(":text, [type='password'], [type='file'], select, textarea, " +
-                    "[type='number'], [type='search'] ,[type='tel'], [type='url'], " +
-                    "[type='email'], [type='datetime'], [type='date'], [type='month'], " +
-                    "[type='week'], [type='time'], [type='datetime-local'], " +
-                    "[type='range'], [type='color'], [type='radio'], [type='checkbox']",
-                    "focusin focusout keyup", delegate)
+                        "[type='number'], [type='search'] ,[type='tel'], [type='url'], " +
+                        "[type='email'], [type='datetime'], [type='date'], [type='month'], " +
+                        "[type='week'], [type='time'], [type='datetime-local'], " +
+                        "[type='range'], [type='color'], [type='radio'], [type='checkbox']",
+                        "focusin focusout keyup", delegate)
                     // Support: Chrome, oldIE
                     // "select" is provided as event.target when clicking a option
                     .validateDelegate("select, option, [type='radio'], [type='checkbox']", "click", delegate);
@@ -526,8 +527,8 @@
             findLastActive: function () {
                 var lastActive = this.lastActive;
                 return lastActive && $.grep(this.errorList, function (n) {
-                        return n.element.name === lastActive.name;
-                    }).length === 1 && lastActive;
+                    return n.element.name === lastActive.name;
+                }).length === 1 && lastActive;
             },
 
             elements: function () {
@@ -655,7 +656,7 @@
             // return the generic message if present and no method specific message is present
             customDataMessage: function (element, method) {
                 return $(element).data("msg" + method.charAt(0).toUpperCase() +
-                        method.substring(1).toLowerCase()) || $(element).data("msg");
+                    method.substring(1).toLowerCase()) || $(element).data("msg");
             },
 
             // return the custom message for the given element name and validation method
@@ -915,10 +916,10 @@
 
             previousValue: function (element) {
                 return $.data(element, "previousValue") || $.data(element, "previousValue", {
-                        old: null,
-                        valid: true,
-                        message: this.defaultMessage(element, "remote")
-                    });
+                    old: null,
+                    valid: true,
+                    message: this.defaultMessage(element, "remote")
+                });
             }
 
         },
